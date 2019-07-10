@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.yi.gradle_mybatis_c3p0.dao.TitleDao">
+<!-- <mapper namespace="kr.or.yi.gradle_mybatis_c3p0.dao.TitleDao"> -->
+<mapper namespace="mapper.titleMapper">
 	<select id="selectTitleByAll" resultType="Title">
 		<!-- id랑 TitleDao 함수명이랑 같아야됨 & typeAliases에서 alias를 정해줬기 때문에 Title만 적어도 되는거다 -->
 		select title_code, title_name from title <!-- 세미콜론은 찍어도 되고 안찍어도 됨 -->
@@ -23,3 +24,5 @@
 		select title_code, title_name from title where title_code = ${titleNo}
 	</select>
 </mapper>
+
+<!-- mapper는 하나만 만드는게 유지보수에 편하다. 여러개 만들면 이것저것 확인해야되니까 -->

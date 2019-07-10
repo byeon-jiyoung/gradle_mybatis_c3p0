@@ -8,7 +8,9 @@ import kr.or.yi.gradle_mybatis_c3p0.dto.Title;
 import kr.or.yi.gradle_mybatis_c3p0.jdbc.MybatisSqlSessionFactory;
 
 public class TitleDaoImpl implements TitleDao {
-	private static final String nameSpace = "kr.or.yi.gradle_mybatis_c3p0.dao.TitleDao";
+//	private static final String nameSpace = "kr.or.yi.gradle_mybatis_c3p0.dao.TitleDao";
+											//TitleMapper.xml에 namespace의 값과 같아야 된다. 그래야 이 이름을 찾아가서 밑에 있는 소스랑 매핑을 해서 sql을 수행하는거다!!
+	private static final String nameSpace = "mapper.titleMapper";
 	
 	@Override
 	public List<Title> selectTitleByAll() {
