@@ -3,7 +3,19 @@
 <mapper namespace="kr.or.yi.gradle_mybatis_c3p0.dao.TitleDao">
 	<select id="selectTitleByAll" resultType="Title">
 		<!-- id랑 TitleDao 함수명이랑 같아야됨 & typeAliases에서 alias를 정해줬기 때문에 Title만 적어도 되는거다 -->
-		select title_code, title_name from title;
+		select title_code, title_name from title <!-- 세미콜론은 찍어도 되고 안찍어도 됨 -->
 	</select>
 	
+	<insert id="insertTitle" parameterType="Title">
+		insert into title(title_code, title_name) values(#{titleNo}, #{titleName})
+													<!-- ★★★ dto에 있는 getTitleNo(), getTitleName()를 호출한다. #이 get을 부른다고 생각해라. 즉, 컬럼명을 적어주는거다!!!!!!!! ★★★-->
+	</insert>
+	
+	<delete id="deleteTitle" parameterType="Title">
+		delete from title where title_code = #{titleNo}
+	</delete>
+	
+	<update id="updateTitle" parameterType="Title">
+		update title set title_name = #{titleName} where title_code = #{titleNo}
+	</update>
 </mapper>

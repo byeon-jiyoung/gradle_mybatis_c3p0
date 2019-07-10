@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -96,6 +97,21 @@ public class TitleList extends JPanel {
 		for (int i = 0; i < width.length; i++) {
 			cModel.getColumn(i).setPreferredWidth(width[i]);
 		}
+	}
+	
+	public Title getSelectedItem() {
+		int i = table.getSelectedRow();
+		Title item = null;
+		if (table.getModel().getRowCount() == 0) { 
+			return item;
+		}
+		if (i < 0 || i > table.getModel().getRowCount() - 1) { 
+			JOptionPane.showMessageDialog(null, "선택된 직책이 없습니다.");
+			return item;
+		}
+
+		item = itemList.get(i);
+		return item;
 	}
 
 }

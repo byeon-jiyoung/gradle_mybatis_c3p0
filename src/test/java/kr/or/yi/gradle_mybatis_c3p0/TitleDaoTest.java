@@ -30,9 +30,11 @@ public class TitleDaoTest extends AbstractTest {
 	}
 
 	@Test
-	public void test01SelectTitleByAll() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+	public void test02SelectTitleByAll() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()"); //수행한 메소드 이름만 추출한다. 그냥 확인용으로 넣은거라 필요없으면 안해도됨
 										//getStackTrace는 배열리턴
+		//= log.debug("test02SelectTitleByAll()"); 이거랑 같은 의미
+		
 		List<Title> titleList = titleDao.selectTitleByAll();
 		Assert.assertNotNull(titleList);
 		
@@ -41,5 +43,35 @@ public class TitleDaoTest extends AbstractTest {
 			log.debug(String.format("%d -> %s", t.getTitleNo(), t.getTitleName()));
 		}
 	}
-
+	
+	@Test
+	public void test01InsertTitle() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+		
+		Title insertTitle = new Title(6, "인턴");
+		int res = titleDao.insertTitle(insertTitle);
+		
+		Assert.assertEquals(1, res);
+	}
+	
+	@Test
+	public void test03UpdateTitle() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+		
+		Title updateTitle = new Title(6, "계약직");
+		
+		int res = titleDao.updateTitle(updateTitle);
+		Assert.assertEquals(1, res);
+	}
+	
+	@Test
+	public void test04DeleteTitle() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+		
+		Title deleteTitle = new Title(6);
+		
+		int res = titleDao.deleteTitle(deleteTitle);
+		Assert.assertEquals(1, res);
+	}
+	
 }
