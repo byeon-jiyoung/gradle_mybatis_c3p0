@@ -10,4 +10,5 @@ public interface TitleDao {
 	int deleteTitle(Title title);
 					//책에는 int로 넘겨줬지만, 원래 겍체로 넘겨주는게 맞다.
 	int updateTitle(Title title);
+	Title selectTitleByCode(Title title);
 }
