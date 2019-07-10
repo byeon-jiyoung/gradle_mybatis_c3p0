@@ -26,7 +26,7 @@ public class MybatisSqlSessionFactory {
 	}
 	
 	public static SqlSession openSession() { //외부호출용
-		return getSqlSessionFactory().openSession();
-										//연결된 정보만 계속 읽어주는거지
+		return getSqlSessionFactory().openSession(); //연결된 정보만 계속 읽어주는거지
+										//여기서 적은 openSession()랑 함수 openSession()랑 다른애다. 함수 안에 적은 openSession()는 내장함수다.
 	}
 }
