@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 import kr.or.yi.gradle_mybatis_c3p0.dao.TitleDao;
 import kr.or.yi.gradle_mybatis_c3p0.dao.TitleDaoImpl;
 import kr.or.yi.gradle_mybatis_c3p0.dto.Title;
-import kr.or.yi.gradle_mybatis_c3p0.ui.content.PanelTitle;
-import kr.or.yi.gradle_mybatis_c3p0.ui.list.TitleList;
+import kr.or.yi.gradle_mybatis_c3p0.ui.content.PanelTitle_before;
+import kr.or.yi.gradle_mybatis_c3p0.ui.list.TitleList_before;
 import javax.swing.JPopupMenu;
 import javax.swing.JMenuItem;
 
@@ -22,11 +22,10 @@ import javax.swing.JMenuItem;
 public class TitleFrameUI extends JFrame implements ActionListener {
 	private TitleDao dao;
 	private JButton btnAdd;
-	private PanelTitle pContent;
-	
+	private PanelTitle_before pContent;
 	
 	private List<Title> titleList;
-	private TitleList pList;
+	private TitleList_before pList;
 	private JButton btnCancel;
 	private JPopupMenu popupMenu;
 	private JMenuItem mntmDelete;
@@ -45,7 +44,7 @@ public class TitleFrameUI extends JFrame implements ActionListener {
 		getContentPane().add(pMain, BorderLayout.CENTER);
 		pMain.setLayout(new BorderLayout(0, 0));
 
-		pContent = new PanelTitle();
+		pContent = new PanelTitle_before();
 		clearContent();
 		pMain.add(pContent, BorderLayout.CENTER);
 
@@ -60,13 +59,13 @@ public class TitleFrameUI extends JFrame implements ActionListener {
 		btnCancel.addActionListener(this);
 		pBtns.add(btnCancel);
 
-		pList = new TitleList("직책 목록");
+		pList = new TitleList_before("직책 목록");
 		reloadList();
 		
 		getContentPane().add(pList, BorderLayout.SOUTH);
 		
 		popupMenu = new JPopupMenu();
-		pList.add(popupMenu, BorderLayout.NORTH);
+		//pList.add(popupMenu, BorderLayout.NORTH); 이거를 없애면 화면크기 변경이 없어짐
 		
 		mntmUpdate = new JMenuItem("수정");
 		mntmUpdate.addActionListener(this);

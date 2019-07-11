@@ -11,16 +11,15 @@ import javax.swing.border.TitledBorder;
 import kr.or.yi.gradle_mybatis_c3p0.dto.Title;
 
 @SuppressWarnings("serial")
-public class PanelTitle extends AbstractPanel<Title> {
+public class PanelTitle_before extends JPanel {
 	private JTextField tfTitleNo;
 	private JTextField tfTitleName;
 
-	public PanelTitle(String title) {
-		super(title);
+	public PanelTitle_before() {
+		initComponents();
 	}
-	
-	@Override
-	protected void initComponents(String title) {
+
+	private void initComponents() {
 		setBorder(new TitledBorder(null, "직책 정보", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 2, 10, 10));
 
@@ -40,26 +39,32 @@ public class PanelTitle extends AbstractPanel<Title> {
 		tfTitleName.setColumns(10);
 		add(tfTitleName);
 	}
-	
-	@Override
+
 	public void setItem(Title Title) {
 		tfTitleNo.setText(String.format("T%03d", Title.getTitleNo()));
 		tfTitleName.setText(Title.getTitleName());
 		tfTitleNo.setEditable(false);
 	}
-	
-	@Override
+
 	public Title getItem() {
 		int titleNo = Integer.parseInt(tfTitleNo.getText().trim().substring(1));
 		String titleName = tfTitleName.getText().trim();
 		return new Title(titleNo, titleName);
 	}
-	
-	@Override
+
 	public void clearComponent(int nextNo) {
 		tfTitleNo.setText(String.format("T%03d", nextNo));
 		tfTitleName.setText("");
 		tfTitleNo.setEditable(false);
+	}
+
+	public JTextField getTfNo() {
+		return tfTitleNo;
+	}
+
+	public void setComponentAllEditable(boolean isEditable) {
+		tfTitleNo.setEditable(isEditable);
+		tfTitleName.setEditable(isEditable);
 	}
 
 }

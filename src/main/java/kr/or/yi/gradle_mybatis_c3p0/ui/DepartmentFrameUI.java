@@ -8,21 +8,36 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import kr.or.yi.gradle_mybatis_c3p0.dao.DepartmentDao;
+import kr.or.yi.gradle_mybatis_c3p0.dao.DepartmentDaoImpl;
 import kr.or.yi.gradle_mybatis_c3p0.dto.Department;
-import kr.or.yi.gradle_mybatis_c3p0.ui.content.PanelDepartment;
-import kr.or.yi.gradle_mybatis_c3p0.ui.list.DepartmentList;
+import kr.or.yi.gradle_mybatis_c3p0.ui.content.PanelDepartment_before;
+import kr.or.yi.gradle_mybatis_c3p0.ui.list.DepartmentList_before;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenuItem;
 
 @SuppressWarnings("serial")
 public class DepartmentFrameUI extends JFrame implements ActionListener {
 	private JButton btnAdd;
-	private PanelDepartment pContent;
+	private PanelDepartment_before pContent;
 	private List<Department> deptList;
-	private DepartmentList pList;
+	private DepartmentList_before pList;
 	private JButton btnCancel;
 
+	private DepartmentDao dao;
+	private JPopupMenu popupMenu;
+	private JMenuItem mntmUpdate;
+	private JMenuItem mntmDelete;
+	
 	public DepartmentFrameUI() {
+		dao = new DepartmentDaoImpl();
+		deptList = dao.selectDepartmentByAll();
 		initComponents();
 	}
 
@@ -33,9 +48,8 @@ public class DepartmentFrameUI extends JFrame implements ActionListener {
 		getContentPane().add(pMain, BorderLayout.CENTER);
 		pMain.setLayout(new BorderLayout(0, 0));
 
-		pContent = new PanelDepartment("부서");
-		
-
+		pContent = new PanelDepartment_before("부서");
+		clearContent();
 		pMain.add(pContent, BorderLayout.CENTER);
 
 		JPanel pBtns = new JPanel();
@@ -49,32 +63,114 @@ public class DepartmentFrameUI extends JFrame implements ActionListener {
 		btnCancel.addActionListener(this);
 		pBtns.add(btnCancel);
 
-		pList = new DepartmentList("부서");
-		
-		deptList = new ArrayList<Department>();
-		pList.setItemList(deptList);
-		pList.reloadData();
+		pList = new DepartmentList_before("부서");
+		reloadList();
 		
 		getContentPane().add(pList, BorderLayout.SOUTH);
 		
-		pContent.clearComponent(1);
+		//pContent.clearComponent(1);
+		
+		popupMenu = new JPopupMenu();
+		addPopup(pList, popupMenu);
+		
+		mntmUpdate = new JMenuItem("수정");
+		mntmUpdate.addActionListener(this);
+		popupMenu.add(mntmUpdate);
+		
+		mntmDelete = new JMenuItem("삭제");
+		mntmDelete.addActionListener(this);
+		popupMenu.add(mntmDelete);
+		
+		pList.setPopupMenu(popupMenu);
+	}
+
+	public void reloadList() {
+		deptList = dao.selectDepartmentByAll();
+		pList.setItemList(deptList);
+		pList.reloadData();
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
+		if (e.getSource() == mntmDelete) {
+			actionPerformedMntmDelete(e);
+		}
+		if (e.getSource() == mntmUpdate) {
+			actionPerformedMntmUpdate(e);
+		}
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
 		}
 		if (e.getSource() == btnAdd) {
-			actionPerformedBtnAdd(e);
+			if(e.getActionCommand().equals("추가")) {
+				actionPerformedBtnAdd(e);
+			}
+			if(e.getActionCommand().equals("수정")) {
+				actionPerformedBtnUpdate(e);
+			}
 		}
 	}
 
-	protected void actionPerformedBtnAdd(ActionEvent e) {
+	private void actionPerformedBtnUpdate(ActionEvent e) {
+		Department updateDept = pContent.getItem();
+		int res = dao.updateDepartment(updateDept);
+		refreshUI(updateDept, res);
+		btnAdd.setText("추가");
+	}
 
+	protected void actionPerformedBtnAdd(ActionEvent e) {
+		Department insertDept = pContent.getItem();
+		//JOptionPane.showMessageDialog(null, insertDept);
+		
+		int res = dao.insertDepartment(insertDept);
+		refreshUI(insertDept, res);
+	}
+
+	public void refreshUI(Department item, int res) {
+		String msg = res==1?"성공":"실패";
+		JOptionPane.showMessageDialog(null, item + msg);
+		reloadList();
+		clearContent();
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
+		clearContent();
+	}
+
+	public void clearContent() {
+		pContent.clearComponent(deptList.size()==0?1:deptList.size()+1);
 	}
 	
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+	
+	protected void actionPerformedMntmUpdate(ActionEvent e) {
+		Department upDept = pList.getSelectedItem();
+		//JOptionPane.showMessageDialog(null, upDept);
+		
+		pContent.setItem(upDept);
+		btnAdd.setText("수정");
+	}
+	
+	protected void actionPerformedMntmDelete(ActionEvent e) {
+		Department delDept = pList.getSelectedItem();
+		//JOptionPane.showMessageDialog(null, delDept);
+		
+		int res = dao.deleteDepartment(delDept);
+		refreshUI(delDept, res);
+	}
 }

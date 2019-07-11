@@ -4,6 +4,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<properties resource="application.properties"/>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<!-- new Department -> dept.setDeptCode(), dept.setDeptName(), dept.setFloor() 즉, DB에 저장된 언더바 형식의 이름을 자바식 카멜형식으로 자동변경해준다 
+		Title할 때는 왜 안했냐면, title에서는 데이터타입이 하나씩 밖에 없어서 마이바티스가 알아서 집어넣어줬는데, Department는 int가 2개다 보니까, 이걸 구분짓기 위해서 이렇게 해줘야 한다.
+		원래는 Title도 해주는게 맞는거. 왜냐하면 DB를 먼저 만들고 이 DB로 dto를 만드는거니까-->
+	</settings>
 	<typeAliases>
 		<package name="kr.or.yi.gradle_mybatis_c3p0.dto"/>
 	</typeAliases>
@@ -21,5 +27,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<mappers>
 		<mapper resource="mappers/TitleMapper.xml"/> <!-- 내가 설정한 파일의 위치와 동일하게 적어줘야 한다 -->
+		<mapper resource="mappers/DepartmentMapper.xml"/>
 	</mappers>
 </configuration>
