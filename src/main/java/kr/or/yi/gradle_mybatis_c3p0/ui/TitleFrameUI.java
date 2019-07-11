@@ -10,6 +10,7 @@ import kr.or.yi.gradle_mybatis_c3p0.ui.content.PanelTitle;
 import kr.or.yi.gradle_mybatis_c3p0.ui.list.AbstractList;
 import kr.or.yi.gradle_mybatis_c3p0.ui.list.TitleList;
 
+
 @SuppressWarnings("serial")
 public class TitleFrameUI extends AbstractFrameUI<Title> {
 	private TitleDao dao;
@@ -19,8 +20,8 @@ public class TitleFrameUI extends AbstractFrameUI<Title> {
 	}
 	
 	@Override
-	protected void initDao() {
-		 dao = new TitleDaoImpl();
+	protected  void initDao() {
+		dao = new TitleDaoImpl();
 	}
 	
 	@Override
@@ -29,15 +30,20 @@ public class TitleFrameUI extends AbstractFrameUI<Title> {
 	}
 	
 	@Override
-	protected AbstractPanel<Title> creatContentPanel(){
+	protected AbstractPanel<Title> createContentPanel(){
 		return new PanelTitle("직책 정보");
+	}
+
+	@Override
+	protected void clearContent() {
+		pContent.clearComponent(itemList.size() == 0 ? 1 : itemList.size() + 1);
 	}
 	
 	@Override
-	protected List<Title> getListAll() {
+	public List<Title> getListAll(){
 		return dao.selectTitleByAll();
 	}
-
+	
 	@Override
 	protected int updateItem(Title item) {
 		return dao.updateTitle(item);
@@ -49,13 +55,7 @@ public class TitleFrameUI extends AbstractFrameUI<Title> {
 	}
 	
 	@Override
-	public void clearContent() {
-		pContent.clearComponent(itemList.size()==0?1:itemList.size()+1);
-	}
-
-	@Override
 	protected int deleteItem(Title item) {
 		return dao.deleteTitle(item);
 	}
-	
 }
