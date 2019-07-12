@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.gradle_mybatis_c3p0.dao.EmployeeDao">
+	<resultMap type="Employee" id="empResult"> <!-- id랑 resultMap이랑 이름 같아야 됨!! -->
+		<id column="eno" property="eNo"/><!-- id는 기본키를 의미함, column은 테이블 컬럼명을 적어줘야 한다. -->
+		<result column="ename" property="eName"/>
+		<result column="salary" property="salary"/>
+		<result column="dept_code" property="dno.deptCode"/>
+		<result column="dept_name" property="dno.deptName"/>
+		<result column="floor" property="dno.floor"/>
+		<result column="gender" property="gender"/>
+		<result column="joindate" property="joinDate"/>
+		<result column="title_code" property="title.titleCode"/>
+		<result column="title_name" property="title.titleName"/>
+	</resultMap>
+	
+	<select id="selectDepartmentByAll" resultMap="empResult"> <!-- join한 결과가 나오기 때문에 resultType이 아니라 resultMap으로 해준다 -->
+		select eno, ename, salary, dept_code, dept_name, floor, gender, joindate, title_code, title_name 
+		from employee e join department d on e.dno = d.dept_code join title t on e.title = t.title_code;
+	</select>
+	
+	<!-- <insert id="insertEmployee" parameterType="Employee">
+	</insert> -->
+</mapper>

@@ -12,7 +12,7 @@ import kr.or.yi.gradle_mybatis_c3p0.dto.Title;
 
 @SuppressWarnings("serial")
 public class PanelTitle_before extends JPanel {
-	private JTextField tfTitleNo;
+	private JTextField tfTitleCode;
 	private JTextField tfTitleName;
 
 	public PanelTitle_before() {
@@ -27,9 +27,9 @@ public class PanelTitle_before extends JPanel {
 		lblTitleNo.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(lblTitleNo);
 
-		tfTitleNo = new JTextField();
-		add(tfTitleNo);
-		tfTitleNo.setColumns(10);
+		tfTitleCode = new JTextField();
+		add(tfTitleCode);
+		tfTitleCode.setColumns(10);
 
 		JLabel lblTitleName = new JLabel("직책명");
 		lblTitleName.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -41,29 +41,29 @@ public class PanelTitle_before extends JPanel {
 	}
 
 	public void setItem(Title Title) {
-		tfTitleNo.setText(String.format("T%03d", Title.getTitleNo()));
+		tfTitleCode.setText(String.format("T%03d", Title.getTitleCode()));
 		tfTitleName.setText(Title.getTitleName());
-		tfTitleNo.setEditable(false);
+		tfTitleCode.setEditable(false);
 	}
 
 	public Title getItem() {
-		int titleNo = Integer.parseInt(tfTitleNo.getText().trim().substring(1));
+		int titleNo = Integer.parseInt(tfTitleCode.getText().trim().substring(1));
 		String titleName = tfTitleName.getText().trim();
 		return new Title(titleNo, titleName);
 	}
 
 	public void clearComponent(int nextNo) {
-		tfTitleNo.setText(String.format("T%03d", nextNo));
+		tfTitleCode.setText(String.format("T%03d", nextNo));
 		tfTitleName.setText("");
-		tfTitleNo.setEditable(false);
+		tfTitleCode.setEditable(false);
 	}
 
 	public JTextField getTfNo() {
-		return tfTitleNo;
+		return tfTitleCode;
 	}
 
 	public void setComponentAllEditable(boolean isEditable) {
-		tfTitleNo.setEditable(isEditable);
+		tfTitleCode.setEditable(isEditable);
 		tfTitleName.setEditable(isEditable);
 	}
 

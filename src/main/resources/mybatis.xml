@@ -28,5 +28,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 		<mapper resource="mappers/TitleMapper.xml"/> <!-- 내가 설정한 파일의 위치와 동일하게 적어줘야 한다 -->
 		<mapper resource="mappers/DepartmentMapper.xml"/>
+		<mapper resource="mappers/EmployeeMapper.xml"/>
 	</mappers>
 </configuration>

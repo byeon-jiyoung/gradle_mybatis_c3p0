@@ -40,7 +40,7 @@ public class TitleDaoTest extends AbstractTest {
 		
 		for(Title t : titleList) {
 			//log.debug(t.toString());
-			log.debug(String.format("%d -> %s", t.getTitleNo(), t.getTitleName()));
+			log.debug(String.format("%d -> %s", t.getTitleCode(), t.getTitleName()));
 		}
 	}
 	

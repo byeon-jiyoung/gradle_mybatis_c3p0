@@ -8,20 +8,20 @@
 	</select>
 	
 	<insert id="insertTitle" parameterType="Title">
-		insert into title(title_code, title_name) values(#{titleNo}, #{titleName})
+		insert into title(title_code, title_name) values(#{titleCode}, #{titleName})
 													<!-- ★★★ dto에 있는 getTitleNo(), getTitleName()를 호출한다. #이 get을 부른다고 생각해라. 즉, 컬럼명을 적어주는거다!!!!!!!! ★★★-->
 	</insert>
 	
 	<delete id="deleteTitle" parameterType="Title">
-		delete from title where title_code = #{titleNo}
+		delete from title where title_code = #{titleCode}
 	</delete>
 	
 	<update id="updateTitle" parameterType="Title">
-		update title set title_name = #{titleName} where title_code = #{titleNo}
+		update title set title_name = #{titleName} where title_code = #{titleCode}
 	</update>
 	
 	<select id="selectTitleByCode" parameterType="Title" resultType="Title">
-		select title_code, title_name from title where title_code = ${titleNo}
+		select title_code, title_name from title where title_code = ${titleCode}
 	</select>
 </mapper>
 

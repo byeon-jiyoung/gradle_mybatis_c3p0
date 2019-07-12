@@ -12,7 +12,7 @@ import kr.or.yi.gradle_mybatis_c3p0.dto.Title;
 
 @SuppressWarnings("serial")
 public class PanelTitle extends AbstractPanel<Title> {
-	private JTextField tfTitleNo;
+	private JTextField tfTitleCode;
 	private JTextField tfTitleName;
 
 	public PanelTitle(String title) {
@@ -28,9 +28,9 @@ public class PanelTitle extends AbstractPanel<Title> {
 		lblTitleNo.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(lblTitleNo);
 
-		tfTitleNo = new JTextField();
-		add(tfTitleNo);
-		tfTitleNo.setColumns(10);
+		tfTitleCode = new JTextField();
+		add(tfTitleCode);
+		tfTitleCode.setColumns(10);
 
 		JLabel lblTitleName = new JLabel("직책명");
 		lblTitleName.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -43,23 +43,23 @@ public class PanelTitle extends AbstractPanel<Title> {
 	
 	@Override
 	public void setItem(Title Title) {
-		tfTitleNo.setText(String.format("T%03d", Title.getTitleNo()));
+		tfTitleCode.setText(String.format("T%03d", Title.getTitleCode()));
 		tfTitleName.setText(Title.getTitleName());
-		tfTitleNo.setEditable(false);
+		tfTitleCode.setEditable(false);
 	}
 	
 	@Override
 	public Title getItem() {
-		int titleNo = Integer.parseInt(tfTitleNo.getText().trim().substring(1));
+		int titleNo = Integer.parseInt(tfTitleCode.getText().trim().substring(1));
 		String titleName = tfTitleName.getText().trim();
 		return new Title(titleNo, titleName);
 	}
 	
 	@Override
 	public void clearComponent(int nextNo) {
-		tfTitleNo.setText(String.format("T%03d", nextNo));
+		tfTitleCode.setText(String.format("T%03d", nextNo));
 		tfTitleName.setText("");
-		tfTitleNo.setEditable(false);
+		tfTitleCode.setEditable(false);
 	}
 
 }
