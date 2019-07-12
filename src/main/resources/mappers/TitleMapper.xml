@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- <mapper namespace="kr.or.yi.gradle_mybatis_c3p0.dao.TitleDao"> -->
 <mapper namespace="mapper.titleMapper"> <!-- 근데 이 이름으로 하면 log에 기록이 안된다. 풀패키지명으로 적어주면 log에 찍힌다. 왜냐하면 log4j2.xml에 Logger name을 풀패키지명으로 정해줬으니까 -->
+	
+	<!-- 
+	만약에 titleCode가 아니라 titleNo라면 여기서 직접 지정해줘야 한다.
+	<resultMap type="Title" id="titleResult">
+		<id column="title_code" property="titleNo"/>
+	</resultMap>
+	& 밑에 select(selectTitleByAll)에서 resultType을 resultMap으로 바꿔주는거도 까먹지마!!!!!!!!!!
+	-->
+	
 	<select id="selectTitleByAll" resultType="Title">
 		<!-- id랑 TitleDao 함수명이랑 같아야됨 & typeAliases에서 alias를 정해줬기 때문에 Title만 적어도 되는거다 -->
 		select title_code, title_name from title <!-- 세미콜론은 찍어도 되고 안찍어도 됨 -->
