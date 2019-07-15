@@ -16,9 +16,24 @@
 	
 	<select id="selectDepartmentByAll" resultMap="empResult"> <!-- join한 결과가 나오기 때문에 resultType이 아니라 resultMap으로 해준다 -->
 		select eno, ename, salary, dept_code, dept_name, floor, gender, joindate, title_code, title_name 
-		from employee e join department d on e.dno = d.dept_code join title t on e.title = t.title_code;
+		from employee e join department d on e.dno = d.dept_code join title t on e.title = t.title_code
 	</select>
 	
-	<!-- <insert id="insertEmployee" parameterType="Employee">
-	</insert> -->
+	<update id="updateEmployee" parameterType="Employee">
+		update employee set ename=#{eName}, salary=#{salary}, dno=#{dno.deptCode}, gender=#{gender}, joindate=#{joinDate}, title=#{title.titleCode} 
+		where eno=#{eNo};
+	</update>
+	
+	<insert id="insertEmployee" parameterType="Employee">
+		insert into employee (eno, ename, salary, dno, gender, joindate, title) values(#{eNo}, #{eName}, #{salary}, #{dno.deptCode}, #{gender}, #{joinDate}, #{title.titleCode});
+	</insert>
+	
+	<delete id="deleteEmployee" parameterType="Employee">
+		delete from employee where eno = #{eNo}
+	</delete>
+	
+	<select id="selectEmployeeByCode" resultMap="empResult" parameterType="Employee">
+		select eno, ename, salary, dept_code, dept_name, floor, gender, joindate, title_code, title_name 
+		from employee e join department d on e.dno = d.dept_code join title t on e.title = t.title_code where eno = #{eNo}
+	</select>
 </mapper>
