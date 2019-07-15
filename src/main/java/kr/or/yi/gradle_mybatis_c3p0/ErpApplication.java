@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import kr.or.yi.gradle_mybatis_c3p0.dto.Title;
 import kr.or.yi.gradle_mybatis_c3p0.ui.AbstractFrameUI;
 import kr.or.yi.gradle_mybatis_c3p0.ui.DepartmentFrameUI_before;
+import kr.or.yi.gradle_mybatis_c3p0.ui.EmployeeFrameUI;
 import kr.or.yi.gradle_mybatis_c3p0.ui.TitleFrameUI;
 import kr.or.yi.gradle_mybatis_c3p0.ui.TitleFrameUI_before;
 
@@ -21,6 +22,7 @@ public class ErpApplication extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JButton btnTitle;
 	private JButton btnDept;
+	private JButton btnEmp;
 
 	public ErpApplication() {
 		initComponents();
@@ -39,11 +41,18 @@ public class ErpApplication extends JFrame implements ActionListener {
 		
 		btnDept = new JButton("부서관리");
 		btnDept.addActionListener(this);
+		
+		btnEmp = new JButton("사원관리");
+		btnEmp.addActionListener(this);
+		contentPane.add(btnEmp);
 		contentPane.add(btnDept);
 		contentPane.add(btnTitle);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEmp) {
+			actionPerformedBtnEmp(e);
+		}
 		if (e.getSource() == btnDept) {
 			actionPerformedBtnDept(e);
 		}
@@ -60,6 +69,10 @@ public class ErpApplication extends JFrame implements ActionListener {
 	
 	protected void actionPerformedBtnDept(ActionEvent e) {
 		DepartmentFrameUI_before frame = new DepartmentFrameUI_before();
+		frame.setVisible(true);
+	}
+	protected void actionPerformedBtnEmp(ActionEvent e) {
+		EmployeeFrameUI frame = new EmployeeFrameUI("사원관리");
 		frame.setVisible(true);
 	}
 }

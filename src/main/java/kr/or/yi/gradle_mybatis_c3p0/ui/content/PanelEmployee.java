@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -23,6 +22,7 @@ import javax.swing.border.TitledBorder;
 import kr.or.yi.gradle_mybatis_c3p0.dto.Department;
 import kr.or.yi.gradle_mybatis_c3p0.dto.Employee;
 import kr.or.yi.gradle_mybatis_c3p0.dto.Title;
+import java.awt.FlowLayout;
 
 
 @SuppressWarnings("serial")
@@ -87,9 +87,9 @@ public class PanelEmployee extends AbstractPanel<Employee> {
 		
 		JPanel pGender = new JPanel();
 		add(pGender);
-		pGender.setLayout(new BoxLayout(pGender, BoxLayout.X_AXIS));
 		
 		ButtonGroup buttonGroup = new ButtonGroup();
+		pGender.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		rdbMale = new JRadioButton("남");
 		buttonGroup.add(rdbMale);
 		rdbMale.setSelected(true);
