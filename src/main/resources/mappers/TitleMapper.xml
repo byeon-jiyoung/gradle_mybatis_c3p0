@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- <mapper namespace="kr.or.yi.gradle_mybatis_c3p0.dao.TitleDao"> -->
-<mapper namespace="mapper.titleMapper"> <!-- 근데 이 이름으로 하면 log에 기록이 안된다. 풀패키지명으로 적어주면 log에 찍힌다. 왜냐하면 log4j2.xml에 Logger name을 풀패키지명으로 정해줬으니까 -->
+<mapper namespace="kr.or.yi.gradle_mybatis_c3p0.dao.TitleDao">
+<!-- <mapper namespace="mapper.titleMapper"> 근데 이 이름으로 하면 log에 기록이 안된다. 풀패키지명으로 적어주면 log에 찍힌다. 왜냐하면 log4j2.xml에 Logger name을 풀패키지명으로 정해줬으니까 -->
 	
 	<!-- 
 	만약에 titleCode가 아니라 titleNo라면 여기서 직접 지정해줘야 한다.
