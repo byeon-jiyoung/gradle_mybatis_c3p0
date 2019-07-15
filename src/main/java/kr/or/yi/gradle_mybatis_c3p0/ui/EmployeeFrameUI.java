@@ -41,7 +41,7 @@ public class EmployeeFrameUI extends AbstractFrameUI<Employee> {
 
 	@Override
 	protected void clearContent() {
-		// TODO Auto-generated method stub
+		pContent.clearComponent(itemList.size() == 0 ? 1 : itemList.size() + 1);
 	}
 
 	@Override
@@ -56,14 +56,12 @@ public class EmployeeFrameUI extends AbstractFrameUI<Employee> {
 
 	@Override
 	protected int insertItem(Employee item) {
-		// TODO Auto-generated method stub
-		return 0;
+		return service.insertEmployee(item);
 	}
 
 	@Override
 	protected int deleteItem(Employee item) {
-		// TODO Auto-generated method stub
-		return 0;
+		return service.deleteEmployee(item);
 	}
 
 }

@@ -30,7 +30,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public int deleteEmployee(Employee employee) {
 		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession();) {
-			int res = sqlSession.insert(nameSpace + ".deleteEmployee", employee);
+			int res = sqlSession.delete(nameSpace + ".deleteEmployee", employee);
 			sqlSession.commit();
 			return res;	
 		}

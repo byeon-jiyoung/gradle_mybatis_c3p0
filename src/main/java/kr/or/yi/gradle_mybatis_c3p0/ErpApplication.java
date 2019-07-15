@@ -9,8 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.yi.gradle_mybatis_c3p0.dto.Department;
 import kr.or.yi.gradle_mybatis_c3p0.dto.Title;
 import kr.or.yi.gradle_mybatis_c3p0.ui.AbstractFrameUI;
+import kr.or.yi.gradle_mybatis_c3p0.ui.DepartmentFrameUI;
 import kr.or.yi.gradle_mybatis_c3p0.ui.DepartmentFrameUI_before;
 import kr.or.yi.gradle_mybatis_c3p0.ui.EmployeeFrameUI;
 import kr.or.yi.gradle_mybatis_c3p0.ui.TitleFrameUI;
@@ -68,7 +70,7 @@ public class ErpApplication extends JFrame implements ActionListener {
 	}
 	
 	protected void actionPerformedBtnDept(ActionEvent e) {
-		DepartmentFrameUI_before frame = new DepartmentFrameUI_before();
+		AbstractFrameUI<Department> frame = new DepartmentFrameUI("부서관리");
 		frame.setVisible(true);
 	}
 	protected void actionPerformedBtnEmp(ActionEvent e) {

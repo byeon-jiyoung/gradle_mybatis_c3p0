@@ -36,6 +36,14 @@ public class EmployeeUIService {
 	}
 
 	public int updateEmployee(Employee item) {
-		return -1;
+		return empDao.updateEmployee(item);
+	}
+
+	public int insertEmployee(Employee item) {
+		return empDao.insertEmployee(item);
+	}
+
+	public int deleteEmployee(Employee item) {
+		return empDao.deleteEmployee(item);
 	}
 }

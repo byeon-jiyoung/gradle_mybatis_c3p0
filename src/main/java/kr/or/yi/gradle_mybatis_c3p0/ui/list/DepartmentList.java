@@ -7,10 +7,14 @@ import kr.or.yi.gradle_mybatis_c3p0.dto.Department;
 @SuppressWarnings("serial")
 public class DepartmentList extends AbstractList<Department> {
 	
-	public DepartmentList(String dept) {
-		super(dept);
-	}
+//	public DepartmentList(String dept) {
+//		super(dept);
+//	}
 	
+	public DepartmentList() {
+		super("부서");
+	}
+
 	@Override
 	protected void tableAlignmentAndWidth() {
 		// 직책번호, 직책명은 가운데 정렬
