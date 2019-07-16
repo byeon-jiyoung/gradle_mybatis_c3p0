@@ -1,11 +1,15 @@
 package kr.or.yi.gradle_mybatis_c3p0.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.ResultContext;
+import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.yi.gradle_mybatis_c3p0.dto.Department;
 import kr.or.yi.gradle_mybatis_c3p0.dto.Employee;
+import kr.or.yi.gradle_mybatis_c3p0.dto.State;
 import kr.or.yi.gradle_mybatis_c3p0.jdbc.MybatisSqlSessionFactory;
 
 public class EmployeeDaoImpl implements EmployeeDao {
@@ -49,6 +53,32 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public Employee selectEmployeeByCode(Employee employee) {
 		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(nameSpace + ".selectEmployeeByCode", employee);
+		}
+	}
+
+	//146p
+	@Override
+	public Map<String, Object> getSalaryByDepartment(Map<String, Object> param) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		ResultHandler<State> resultHandler = new ResultHandler<State>() { //state클래스에 담아서 던져주겠다
+			
+			@Override
+			public void handleResult(ResultContext<? extends State> resultContext) {
+				State state = resultContext.getResultObject();
+				map.put(state.getDeptname(), state.getTotal());
+			}
+		};
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession();) {
+			sqlSession.select(nameSpace + ".getSalaryByDepartment", param, resultHandler); //select한 결과를 resultHandler에 담는다
+		}
+		return map;
+	}
+
+	//147p
+	@Override
+	public State getStateSalaryByDepartment(Map<String, Object> param) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(nameSpace + ".getStateSalaryByDepartment", param);
 		}
 	}
 

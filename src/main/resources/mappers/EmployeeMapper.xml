@@ -36,4 +36,15 @@
 		select eno, ename, salary, dept_code, dept_name, floor, gender, joindate, title_code, title_name 
 		from employee e join department d on e.dno = d.dept_code join title t on e.title = t.title_code where eno = #{eNo}
 	</select>
+	
+	<!-- 143p -->
+	<select id="getSalaryByDepartment" statementType="CALLABLE" parameterType="map" resultType="State">
+		{call salary_total(#{deptno, mode=IN, jdbcType=INTEGER})}
+						<!-- parameterType인 map이 들어간다. 즉 키가 호출되면 그 값이 들어간다. => map.key가 호출되서 map.value가 들어가는.. -->
+	</select>
+	
+	<select id="getStateSalaryByDepartment" statementType="CALLABLE" parameterType="map" resultType="State">
+		{call salary_total(#{deptno, mode=IN, jdbcType=INTEGER})}
+							<!-- 매개변수명, in/out, 매개변수타입 -->
+	</select>
 </mapper>
