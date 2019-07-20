@@ -1,7 +1,5 @@
 package kr.or.yi.gradle_mybatis_c3p0;
 
-import static org.junit.Assert.fail;
-
 import java.util.List;
 
 import org.junit.AfterClass;

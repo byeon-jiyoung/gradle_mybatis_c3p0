@@ -51,13 +51,16 @@ public class EmployeeDaoTest extends AbstractTest {
 	public void test03UpdateEmployee() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
 		
-		Calendar joinDate = Calendar.getInstance();
-		joinDate.clear();
+		Calendar joinDate = Calendar.getInstance(); //Calendar는 추상클래스이기 때문에 직접 객체를 생성할 수 없고, 메서드를 통해서 완전히 구현된 클래스의 인스턴스를 얻어야 한다.
+										// getInstance() 메서드를 호출 하면 현재의 일짜와 시각으로 초기화가 되기 때문에 별도의 설정 작업 없이도 calendar.getTime() 메서드로 현재 시간을 얻어 올 수 있습니다.
+
+		joinDate.clear(); //반드시 java Calendar는 set 하기전에 clear() 해주어야 한다.
 		joinDate.set(Calendar.YEAR, 2018);
 		joinDate.set(Calendar.MONTH, 7);
 		joinDate.set(Calendar.DAY_OF_MONTH, 01);
 		
 		Employee upEmp = new Employee(5000, "김우빈", 5000000, new Department(1), true, joinDate.getTime(), new Title(2));
+																						//getTime() => 현재의 객체를 Date 객체로 변환한다.
 		
 		int res = empDao.updateEmployee(upEmp);
 		Assert.assertEquals(1, res);
@@ -97,6 +100,7 @@ public class EmployeeDaoTest extends AbstractTest {
 	@Test
 	public void test06GetSalaryByDepartment() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("deptno", 1); //deptno에 1을 넣는다
 					//impl에 넣은 변수명과 동일해야 한다
@@ -105,6 +109,7 @@ public class EmployeeDaoTest extends AbstractTest {
 		Map<String , Object> result = empDao.getSalaryByDepartment(param);
 		
 		for(Entry<String, Object> e : result.entrySet()) {
+											//KeySet() 는 key를 다 가져온다 & enterySet()은 map에 정의된 key값과 value값을 다 가져온다!!
 			log.debug(String.format("%s -> %d", e.getKey(), e.getValue()));
 		}
 		Assert.assertNotEquals(0, result.size());
@@ -113,6 +118,7 @@ public class EmployeeDaoTest extends AbstractTest {
 	@Test
 	public void test07GetStateSalaryByDepartment() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName()+"()");
+		
 		Map<String, Object> param = new HashMap<>();
 		param.put("deptno", 2);
 		

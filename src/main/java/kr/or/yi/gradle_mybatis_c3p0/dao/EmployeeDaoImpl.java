@@ -61,6 +61,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public Map<String, Object> getSalaryByDepartment(Map<String, Object> param) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		ResultHandler<State> resultHandler = new ResultHandler<State>() { //state클래스에 담아서 던져주겠다
+		//대용량데이터 or Map일 경우에 ResultHandler사용가능
 			
 			@Override
 			public void handleResult(ResultContext<? extends State> resultContext) {
